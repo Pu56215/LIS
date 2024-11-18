@@ -93,7 +93,7 @@ class NoiseModel:
         self.camera = camera
         if param_dir is None:
             try:
-                self.param_dir = '~/code/mmdetection/mmdet/datasets/pipelines/noisemodel/camera_params'
+                self.param_dir = '/root/autodl-tmp/workspace/LIS/mmdetection/mmdet/datasets/pipelines/noisemodel/camera_params'
             except:
                 print('please specify the location of camera parameters, e.g., ~/code/mmdetection/mmdet/datasets/pipelines/noisemodel/camera_params')
                 raise Exception
@@ -165,7 +165,7 @@ class NoiseModel:
         # ratio = np.random.uniform(low=20, high=50)
         # , dtype=np.float32
         # print(K, color_bias, g_scale, G_scale, G_shape, R_scale, Q_step, saturation_level, ratio)
-        return np.array([K, color_bias, g_scale, G_scale, G_shape, R_scale, Q_step, saturation_level, ratio])
+        return K, color_bias, g_scale, G_scale, G_shape, R_scale, Q_step, saturation_level, ratio
 
     def __call__(self, results, params=None):
         _dark = np.random.uniform(self.dark_ratio[0], self.dark_ratio[1])

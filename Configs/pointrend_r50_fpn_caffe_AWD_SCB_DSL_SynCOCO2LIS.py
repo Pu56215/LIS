@@ -1,8 +1,6 @@
 _base_ = './mask_rcnn_r50_fpn_caffe_AWD_SCB_DSL_SynCOCO2LIS.py'
 
-load_from = '/data3/chenlinwei/.cache/torch/point_rend_r50_caffe_fpn_mstrain_3x_coco_41.0_38.0.pth'
-
-log_level = 'INFO'
+load_from = 'https://download.openmmlab.com/mmdetection/v2.0/point_rend/point_rend_r50_caffe_fpn_mstrain_3x_coco/point_rend_r50_caffe_fpn_mstrain_3x_coco-e0ebb6b7.pth'
 # use caffe img_norm
 img_norm_cfg = dict(
     mean=[103.530, 116.280, 123.675], std=[1.0, 1.0, 1.0], to_rgb=False)
@@ -43,16 +41,16 @@ coco = dict(
     classes=('bicycle', 'chair', 'dining table',
              'bottle', 'motorcycle', 'car', 'tv', 'bus'),
     type='CocoDataset',
-    ann_file='/data3/chenlinwei/dataset/coco/annotations/instances_train2017.json',
-    img_prefix='/data3/chenlinwei/dataset/coco/train2017/',
+    ann_file='/root/autodl-tmp/coco/annotations/instances_train2017.json',
+    img_prefix='/root/autodl-tmp/coco/train2017/',
     pipeline=train_pipeline)
 
 coco_val = dict(
     classes=('bicycle', 'chair', 'dining table',
              'bottle', 'motorcycle', 'car', 'tv', 'bus'),
     type='CocoDataset',
-    ann_file='/data3/chenlinwei/dataset/coco/annotations/instances_val2017.json',
-    img_prefix='/data3/chenlinwei/dataset/coco/val2017/',
+    ann_file='/root/autodl-tmp/coco/annotations/instances_val2017.json',
+    img_prefix='/root/autodl-tmp/coco/val2017/',
     pipeline=test_pipeline)
 
 
@@ -60,15 +58,15 @@ test_lod_coco = dict(
     classes=('bicycle', 'car', 'motorbike', 'bus',
              'bottle', 'chair', 'diningtable', 'tvmonitor'),
     type='CocoDataset',
-    ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_png_test+1.json',
+    ann_file='/root/autodl-tmp/workspace/LIS/dataset/annotations/lis_coco_png_test+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_png_traintest+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_test+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_traintest+1.json',
-    img_prefix='/data3/chenlinwei/dataset/LOD/RAW_Dark/',
+    img_prefix='/root/autodl-tmp/workspace/LIS/dataset/RAW-dark/',
     # img_prefix='/data3/chenlinwei/dataset/LOD/RGB_Dark/',
     pipeline=test_pipeline)
     
-BATCHSIZE = 8
+BATCHSIZE = 10
 GPU=1
 optimizer = dict(type='SGD', lr=0.02 * BATCHSIZE * GPU / 16,
                  momentum=0.9, weight_decay=0.0001)

@@ -1,4 +1,4 @@
-ROOT = '~/mmdetection/configs/'
+ROOT = '../mmdetection/configs/'
 _base_ = [
     ROOT + '/_base_/models/mask_rcnn_r50_fpn.py',
     ROOT + '/_base_/datasets/coco_instance.py',
@@ -6,10 +6,10 @@ _base_ = [
     ROOT + '/_base_/default_runtime.py'
 ]
 
-
+seed = 0
 # dataset settings
 dataset_type = 'CocoDataset'
-data_root = '/data3/chenlinwei/dataset/coco/'
+data_root = '/root/autodl-tmp/coco/'
 
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -32,8 +32,8 @@ train_pipeline = [
     dict(type='Normalize', **img_norm_cfg),
     dict(type='Pad', size_divisor=32),
     dict(type='DefaultFormatBundle'),
-    dict(type='Collect', keys=['img', 'noisy_img', 'gt_bboxes', 'gt_labels', 'gt_masks']),
-    # dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels', 'gt_masks']),
+    # dict(type='Collect', keys=['img', 'noisy_img', 'gt_bboxes', 'gt_labels', 'gt_masks']),
+    dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels', 'gt_masks']),
 ]
 
 test_pipeline = [
@@ -61,25 +61,25 @@ test_lod_coco = dict(
     type='CocoDataset',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_png_test+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_png_traintest+1.json',
-    ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_test+1.json',
+    ann_file='/root/autodl-tmp/workspace/LIS/dataset/annotations/lis_coco_JPG_test+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_traintest+1.json',
     # img_prefix='/data3/chenlinwei/dataset/LOD/RAW_Dark/',
-    img_prefix='/data3/chenlinwei/dataset/LOD/RGB_Dark/',
+    img_prefix='/root/autodl-tmp/workspace/LIS/dataset/LOD/RGB-dark/',
     pipeline=test_pipeline)
 
 coco = dict(
     classes=('bicycle', 'chair', 'dining table', 'bottle', 'motorcycle', 'car', 'tv', 'bus'),
     type='CocoDataset',
-    ann_file='/data3/chenlinwei/dataset/coco/annotations/instances_train2017.json',
+    ann_file='/root/autodl-tmp/coco/annotations/instances_train2017.json',
     # seg_prefix='/data3/chenlinwei/dataset/coco/stuffthingmaps/train2017/',
-    img_prefix='/data3/chenlinwei/dataset/coco/train2017/',
+    img_prefix='/root/autodl-tmp/coco/train2017/',
     pipeline=train_pipeline)
 
 coco_val = dict(
     classes=('bicycle', 'chair', 'dining table', 'bottle', 'motorcycle', 'car', 'tv', 'bus'),
     type='CocoDataset',
-    ann_file='/data3/chenlinwei/dataset/coco/annotations/instances_val2017.json',
-    img_prefix='/data3/chenlinwei/dataset/coco/val2017/',
+    ann_file='/root/autodl-tmp/coco/annotations/instances_val2017.json',
+    img_prefix='/root/autodl-tmp/coco/val2017/',
     pipeline=test_pipeline)
 
 BATCHSIZE = 8

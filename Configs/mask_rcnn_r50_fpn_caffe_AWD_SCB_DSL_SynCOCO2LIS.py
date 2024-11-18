@@ -59,7 +59,7 @@ test_lod_coco = dict(
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_png_traintest+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_test+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_traintest+1.json',
-    img_prefix='/data3/chenlinwei/dataset/LOD/RAW_Dark/',
+    img_prefix='/root/autodl-tmp/workspace/LIS/dataset/RAW-dark/',
     # img_prefix='/data3/chenlinwei/dataset/LOD/RGB_Dark/',
     pipeline=test_pipeline)
 
