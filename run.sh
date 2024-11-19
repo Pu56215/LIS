@@ -1,0 +1,1 @@
+python mmdetection/tools/train.py Configs/mask_rcnn/mask_rcnn_r50_fpn_caffe_AWD_SCB_DSL_Syn_0.2_COCO2LIS.py

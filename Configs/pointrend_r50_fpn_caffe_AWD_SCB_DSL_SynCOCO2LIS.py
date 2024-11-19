@@ -41,16 +41,16 @@ coco = dict(
     classes=('bicycle', 'chair', 'dining table',
              'bottle', 'motorcycle', 'car', 'tv', 'bus'),
     type='CocoDataset',
-    ann_file='/root/autodl-tmp/coco/annotations/instances_train2017.json',
-    img_prefix='/root/autodl-tmp/coco/train2017/',
+    ann_file='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset/coco/annotations/instances_train2017.json',
+    img_prefix='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset/coco/train2017/',
     pipeline=train_pipeline)
 
 coco_val = dict(
     classes=('bicycle', 'chair', 'dining table',
              'bottle', 'motorcycle', 'car', 'tv', 'bus'),
     type='CocoDataset',
-    ann_file='/root/autodl-tmp/coco/annotations/instances_val2017.json',
-    img_prefix='/root/autodl-tmp/coco/val2017/',
+    ann_file='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset.coco/annotations/instances_val2017.json',
+    img_prefix='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset/coco/val2017/',
     pipeline=test_pipeline)
 
 
@@ -58,11 +58,11 @@ test_lod_coco = dict(
     classes=('bicycle', 'car', 'motorbike', 'bus',
              'bottle', 'chair', 'diningtable', 'tvmonitor'),
     type='CocoDataset',
-    ann_file='/root/autodl-tmp/workspace/LIS/dataset/annotations/lis_coco_png_test+1.json',
+    ann_file='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/LIS/dataset/annotations/lis_coco_png_test+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_png_traintest+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_test+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_traintest+1.json',
-    img_prefix='/root/autodl-tmp/workspace/LIS/dataset/RAW-dark/',
+    img_prefix='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/LIS/dataset/RAW-dark/',
     # img_prefix='/data3/chenlinwei/dataset/LOD/RGB_Dark/',
     pipeline=test_pipeline)
     

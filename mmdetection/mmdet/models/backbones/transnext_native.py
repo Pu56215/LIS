@@ -510,7 +510,8 @@ class TransNeXt(BaseModule):
             x = x.reshape(B, H, W, -1).permute(0, 3, 1, 2).contiguous()
             outs.append(x)
 
-        return outs[-1]
+        # return outs[-1]
+        return outs
 
     def forward(self, x):
         x = self.forward_features(x)
@@ -524,9 +525,16 @@ class TransNeXt(BaseModule):
 class transnext_tiny(TransNeXt):
     def __init__(self, **kwargs):
         super().__init__(window_size=[3, 3, 3, None],
-                         patch_size=4, embed_dims=[72, 144, 288, 576], num_heads=[3, 6, 12, 24],
+                         patch_size=4, 
+                        #  embed_dims=[72, 144, 288, 576], 
+                        #  num_heads=[3, 6, 12, 24],
+                         embed_dims=[48, 96, 192, 384], 
+                         num_heads=[2, 4, 8, 16],
                          mlp_ratios=[8, 8, 4, 4], qkv_bias=True,
-                         norm_layer=partial(nn.LayerNorm, eps=1e-6), depths=[2, 2, 15, 2], sr_ratios=[8, 4, 2, 1],
+                         norm_layer=partial(nn.LayerNorm, eps=1e-6),
+                        #  depths=[2, 2, 15, 2], 
+                         depths=[2, 2, 9, 2], 
+                         sr_ratios=[8, 4, 2, 1],
                          drop_rate=0.0, drop_path_rate=0.3,
                          pretrained=kwargs['pretrained'], img_size=kwargs['img_size'],
                          pretrain_size=kwargs['pretrain_size'])
@@ -537,7 +545,8 @@ class transnext_tiny(TransNeXt):
 class transnext_small(TransNeXt):
     def __init__(self, **kwargs):
         super().__init__(window_size=[3, 3, 3, None],
-                         patch_size=4, embed_dims=[72, 144, 288, 2048], num_heads=[3, 6, 12, 24],
+                         patch_size=4, embed_dims=[72, 144, 288, 576], num_heads=[3, 6, 12, 24],
+                        #  embed_dims=[256, 512, 1024, 2048], num_heads=[16, 32, 64, 128],
                          mlp_ratios=[8, 8, 4, 4], qkv_bias=True,
                          norm_layer=partial(nn.LayerNorm, eps=1e-6), depths=[5, 5, 22, 5], sr_ratios=[8, 4, 2, 1],
                          drop_rate=0.0, drop_path_rate=0.5,

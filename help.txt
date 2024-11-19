@@ -1,0 +1,12 @@
+1.
+Traceback (most recent call last):
+  File "tools/train.py", line 188, in <module>
+    main()
+  File "tools/train.py", line 128, in main
+    cfg.dump(osp.join(cfg.work_dir, osp.basename(args.config)))
+  File "/home/serve/anaconda3/envs/LIS-PBX/lib/python3.8/site-packages/mmcv/utils/config.py", line 524, in dump
+    f.write(self.pretty_text)
+  File "/home/serve/anaconda3/envs/LIS-PBX/lib/python3.8/site-packages/mmcv/utils/config.py", line 479, in pretty_text
+    text, _ = FormatCode(text, style_config=yapf_style, verify=True)
+TypeError: FormatCode() got an unexpected keyword argument 'verify'
+solution: pip install yapf==0.40.1

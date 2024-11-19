@@ -93,7 +93,7 @@ class NoiseModel:
         self.camera = camera
         if param_dir is None:
             try:
-                self.param_dir = '/root/autodl-tmp/workspace/LIS/mmdetection/mmdet/datasets/pipelines/noisemodel/camera_params'
+                self.param_dir = '/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/LIS/mmdetection/mmdet/datasets/pipelines/noisemodel/camera_params'
             except:
                 print('please specify the location of camera parameters, e.g., ~/code/mmdetection/mmdet/datasets/pipelines/noisemodel/camera_params')
                 raise Exception

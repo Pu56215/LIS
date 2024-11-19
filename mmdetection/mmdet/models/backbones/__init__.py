@@ -14,9 +14,9 @@ from .ssd_vgg import SSDVGG
 from .trident_resnet import TridentResNet
 from .swin import SwinTransformer
 from .convnext import ConvNeXt
-
+from .transnext_native import TransNeXt
 __all__ = [
     'RegNet', 'ResNet', 'ResNetV1d', 'ResNetAdaD', 'ResNeXt', 'SSDVGG', 'HRNet',
     'MobileNetV2', 'Res2Net', 'HourglassNet', 'DetectoRS_ResNet',
-    'DetectoRS_ResNeXt', 'Darknet', 'ResNeSt', 'TridentResNet', 'CSPDarknet'
+    'DetectoRS_ResNeXt', 'Darknet', 'ResNeSt', 'TridentResNet', 'CSPDarknet','TransNeXt'
 ]

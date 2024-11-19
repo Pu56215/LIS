@@ -1,5 +1,6 @@
 # import os.path as osp
 
+CocoSubset = True
 # dataset settings
 dataset_type = 'CocoDataset'
 # data_root = '/data3/chenlinwei/dataset/coco/'
@@ -55,27 +56,36 @@ test_lod_coco = dict(
     classes=('bicycle', 'car', 'motorbike', 'bus',
              'bottle', 'chair', 'diningtable', 'tvmonitor'),
     type='CocoDataset',
-    ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_png_test+1.json',
+    ann_file='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/LIS/dataset/annotations/lis_coco_png_test+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_png_traintest+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_test+1.json',
     # ann_file='/data3/chenlinwei/dataset/LOD/lis_coco_JPG_traintest+1.json',
-    img_prefix='/root/autodl-tmp/workspace/LIS/dataset/RAW-dark/',
+    img_prefix='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/LIS/dataset/RAW-dark/',
     # img_prefix='/data3/chenlinwei/dataset/LOD/RGB_Dark/',
     pipeline=test_pipeline)
 
-coco = dict(
-    classes=('bicycle', 'chair', 'dining table', 'bottle', 'motorcycle', 'car', 'tv', 'bus'),
-    type='CocoDataset',
-    ann_file='/data3/chenlinwei/dataset/coco/annotations/instances_train2017.json',
-    # seg_prefix='/data3/chenlinwei/dataset/coco/stuffthingmaps/train2017/',
-    img_prefix='/data3/chenlinwei/dataset/coco/train2017/',
-    pipeline=train_pipeline)
+if CocoSubset:
+    coco = dict(
+        classes=('bicycle', 'chair', 'dining table', 'bottle', 'motorcycle', 'car', 'tv', 'bus'),
+        type='CocoSubsetDataset',
+        subset_ratio=0.2,  # 使用 20% 的数据
+        ann_file='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset/coco/annotations/instances_train2017.json',
+        img_prefix='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset/coco/train2017/',
+        pipeline=train_pipeline)
+else:
+    coco = dict(
+        classes=('bicycle', 'chair', 'dining table', 'bottle', 'motorcycle', 'car', 'tv', 'bus'),
+        type='CocoDataset',
+        # seg_prefix='/data3/chenlinwei/dataset/coco/stuffthingmaps/train2017/',
+        ann_file='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset/coco/annotations/instances_train2017.json',
+        img_prefix='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset/coco/train2017/',
+        pipeline=train_pipeline)
 
 coco_val = dict(
     classes=('bicycle', 'chair', 'dining table', 'bottle', 'motorcycle', 'car', 'tv', 'bus'),
     type='CocoDataset',
-    ann_file='/data3/chenlinwei/dataset/coco/annotations/instances_val2017.json',
-    img_prefix='/data3/chenlinwei/dataset/coco/val2017/',
+    ann_file='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset.coco/annotations/instances_val2017.json',
+    img_prefix='/media/serve/5e1c7f91-825a-41c3-a179-3b1e4e86ea67/home/xws/workspace/pbx/dataset/coco/val2017/',
     pipeline=test_pipeline)
 
 BATCHSIZE = 8
@@ -128,15 +138,16 @@ log_config = dict(
     interval=50,
     hooks=[
         dict(type='TextLoggerHook'),
-        # dict(type='TensorboardLoggerHook')
+        dict(type='TensorboardLoggerHook')
     ])
 # yapf:enable
 custom_hooks = [dict(type='NumClassCheckHook')]
 
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
-work_dir = './work_dir'
-load_from = '/data3/chenlinwei/.cache/torch/mask_rcnn_r50_caffe_fpn_mstrain-poly_3x_coco_bbox_mAP-0.408_segm_mAP-0.37.pth'
+work_dir = './work_dirs/mask_rcnn_r50_fpn_caffe_AWD_SCB_DSL_Syn_0.2_COCO2LIS'
+# load_from = '/data3/chenlinwei/.cache/torch/mask_rcnn_r50_caffe_fpn_mstrain-poly_3x_coco_bbox_mAP-0.408_segm_mAP-0.37.pth'
+load_from = 'https://download.openmmlab.com/mmdetection/v2.0/mask_rcnn/mask_rcnn_r50_caffe_fpn_mstrain-poly_3x_coco/mask_rcnn_r50_caffe_fpn_mstrain-poly_3x_coco_bbox_mAP-0.408__segm_mAP-0.37_20200504_163245-42aa3d00.pth' 
 # from mmdetection
 
 resume_from = None
@@ -162,7 +173,8 @@ model = dict(
         style='caffe',
         init_cfg=dict(
             type='Pretrained',
-            checkpoint='open-mmlab://detectron2/resnet50_caffe')),
+            checkpoint='open-mmlab://detectron2/resnet50_caffe')
+    ),
     neck=dict(
         type='FPN',
         in_channels=[256, 512, 1024, 2048],

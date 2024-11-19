@@ -5,7 +5,7 @@
 # model = ResNetAdaDSmoothPrior(style='caffe',depth=50).cuda()
 
 # # 确保输入大小匹配
-# input_size = (3, 1280, 960)  # 例如你需要使用的输入尺寸
+# input_size = (3, 640, 480)  # 例如你需要使用的输入尺寸
 
 # # 测试模型结构
 # summary(model, input_size=input_size)
@@ -25,6 +25,11 @@ x = torch.randn(2, *input_size).cuda()  # Batch size 为 2
 
 # 运行模型前向传播
 output = model(x)
-
+# import pdb
+# pdb.set_trace()
 # 打印输出的形状，确认模型输出
-print(f"Output shape: {output[-1].shape}")
+print(f"Output[-1] shape: {output[-1].shape}")
+print(f"Output[-2] shape: {output[-2].shape}")
+print(f"Output[-3] shape: {output[-3].shape}")
+print(f"Output[-4] shape: {output[-4].shape}")
+
